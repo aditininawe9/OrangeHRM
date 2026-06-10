@@ -13,7 +13,15 @@ public class WaitUtils {
         return new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public WebDriverWait getWait(WebDriver driver) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10));
+    public static WebElement waitForVisibility(WebDriver driver, WebElement locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(locator));
+    }
+
+    public static boolean WaitForUrl(WebDriver driver, String partialUrl) {
+        return new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlContains(partialUrl));
+    }
+
+    public static WebElement elementToBeClickable(WebDriver driver, WebElement locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
     }
 }

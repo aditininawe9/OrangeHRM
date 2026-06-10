@@ -1,30 +1,24 @@
 package com.testingacademy.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
-
-import static com.testingacademy.utils.WaitUtils.waitForVisibility;
+import static com.testingacademy.utils.WaitUtils.elementToBeClickable;
 
 public class DashboardPage {
     private WebDriver driver;
-    public DashboardPage(WebDriver driver) {
+    @FindBy(xpath="//span[text()='Admin']")
+    WebElement adminMenu;
+
+    public DashboardPage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    By timeAtWorkWidget = By.xpath("//button[contains(@class,'orangehrm-attendance-card-action')]");
-
-    public boolean isDashboardPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        return wait.until(ExpectedConditions.urlContains("dashboard"));
-    }
-
-    public void clickAttendenceBtn() {
-        waitForVisibility(driver, timeAtWorkWidget);
-        driver.findElement(timeAtWorkWidget).click();
+    public void navigateToAdminMenu() {
+        elementToBeClickable(driver, adminMenu).click();
     }
 
 }
