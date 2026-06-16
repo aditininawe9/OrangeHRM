@@ -12,6 +12,9 @@ public class DashboardPage {
     @FindBy(xpath="//span[text()='Admin']")
     WebElement adminMenu;
 
+    @FindBy(xpath="//span[text()='PIM']")
+    WebElement pimMenu;
+
     public DashboardPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -19,6 +22,10 @@ public class DashboardPage {
 
     public void navigateToAdminMenu() {
         elementToBeClickable(driver, adminMenu).click();
+    }
+
+    public void navigateToPIMMenu() {
+        elementToBeClickable(driver, pimMenu).click();
     }
 
 }
