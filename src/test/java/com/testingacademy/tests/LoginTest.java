@@ -43,14 +43,26 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(adminPage.addUserDisplayed());
     }
 
-    @Test
-    public void testNavigateToPIM() {
+    @DataProvider(name = "employeeData")
+    public Object[][] employeeData() {
+        return new Object[][] {
+                {"Aditi","Soni","KA1220120012345","2026-07-16","Indian","Female"},
+        };
+    }
+    @Test(dataProvider = "employeeData")
+    public void testNavigateToPIM(String firstName, String lastName, String licenseNumber, String eDate, String nationality, String gender) {
         DashboardPage dashboardPage = new DashboardPage(driver);
         dashboardPage.navigateToPIMMenu();
 
         PIMPage pimPage = new PIMPage(driver);
         pimPage.addEmployee();
-        pimPage.addDetails();
+        pimPage.addDetails(firstName, lastName);
+
+        pimPage.addPersonalDetails(
+                firstName,
+                lastName,
+                licenseNumber,
+                eDate, nationality, gender);
     }
 
     @Test
